@@ -1,105 +1,124 @@
-# 🧠 The achievement of book success based on visual design and publisher reputation in the digital marketplace
-## 📌 Project Overview
-This project models **opinion dynamics** in a population using an **agent-based simulation**.  
-The focus is on understanding how **external shocks** (such as policy changes or major events) affect:
-- Time to reach consensus
-- Stability of opinions
-- Level of polarization in the network
+# Kindle Book Success Analysis
 
-This work was completed as part of the **Foundation of Computational Social Systems** course.
+> Analyzing how publisher reputation and cover design influence book sales, ratings, and bestseller status in the digital marketplace — built with Python, Pandas, Seaborn, and statistical modeling on a structured Kindle dataset.
 
 ---
 
-## 🗂 Repository Structure
+## Project Overview
+
+This project investigates the key factors that drive a book's commercial success on Amazon Kindle. Using a structured Kindle book dataset, the analysis examines how publisher reputation (e.g., Penguin, HarperCollins) and cover design attributes interact with sales performance, customer ratings, and review engagement.
+
+The findings provide actionable guidance for publishers, authors, and investors seeking to optimize their digital marketplace strategy.
+
+**Tools & Technologies:** Python · Pandas · NumPy · Matplotlib · Seaborn · Scikit-learn · Jupyter Notebook
+
+---
+
+## Research Questions
+
+1. How does publisher reputation affect a book's sales performance, rating, and reviews?
+2. How does a book's cover design contribute to success across different categories?
+3. What is the relationship between book price and customer review engagement?
+4. Which factors most strongly predict bestseller status?
+
+---
+
+## Key Findings
+
+- **Publisher reputation is the strongest driver of success** — books from Penguin and HarperCollins consistently achieve higher ratings, more reviews, and greater bestseller rates due to audience trust and superior marketing reach
+- **Cover design matters differently by genre** — minimalist covers perform best in non-fiction, while bold and vibrant designs correlate with success in fiction
+- **Sweet spot pricing ($5–$15)** generates the highest volume of customer reviews, as readers perceive it as the best price-to-value ratio
+- **Bestselling books show consistently higher and more uniform ratings** than non-bestsellers, confirming that reader trust reinforces commercial momentum
+- **Price alone is a weak predictor of sales success** — publisher brand and editorial quality outweigh pricing as a success factor
+
+---
+
+## Dataset
+
+- **Source:** Kindle book dataset (kindle_data-v2.csv)
+- **Key fields:** Title, Author, Publisher, Category, Price, Stars (Rating), Reviews, Bestseller Status, Editor's Pick, Kindle Unlimited, Published Year
+- **Size:** Large structured dataset with multiple performance indicators per book
+
+---
+
+## Methodology
+
+### 1. Data Cleaning & Preprocessing
+- Filled missing author names with "Unknown Author" placeholder
+- Imputed missing publisher/seller values with the most frequent value
+- Extracted `publishedYear` from dates and dropped the raw date column
+- Detected and removed outliers in price and review counts
+
+### 2. Feature Engineering
+- Normalized price and review counts to [0, 1] range using MinMaxScaler
+- Created category-level bestseller frequency statistics
+- Engineered normalized rating variables for cross-category comparison
+
+### 3. Statistical Analysis
+- Descriptive statistics (mean, median, distribution) for price, rating, and reviews
+- Correlation matrix to identify relationships between all numerical variables
+- Publisher-level performance comparison
+
+### 4. Visualization
+- **Histogram** — distribution of normalized book prices
+- **Box plot** — review count distribution and outlier detection
+- **Correlation heatmap** — relationships between price, rating, reviews, and bestseller status
+- **Pair plot** — pairwise relationships across all key variables
+
+---
+
+## Results Summary
+
+| Factor | Impact on Success |
+|---|---|
+| Publisher reputation (Penguin, HarperCollins) | Strong positive — higher ratings, reviews, bestseller rate |
+| Cover design (professional typography + color) | Positive — increases visibility and customer interest |
+| Price range $5–$15 | Highest review engagement |
+| High ratings | Strong predictor of bestseller status |
+| Price alone | Weak predictor — not a reliable success factor |
+
+---
+
+## Repository Structure
+
 ```
-├── notebooks/
-│   └── opinion_dynamics.ipynb   # Main simulation notebook
-├── report.pdf                   # Detailed report with methodology and results
-├── poster.pdf                   # Visual summary of the project
-└── requirements.txt             # Python dependencies
+├── Code.ipynb                        # Main analysis notebook
+├── FCSS_Project_Report.pdf           # Full research report
+├── Poster.pdf                        # Visual project summary poster
+└── kindle_data-v2.csv                # Dataset
 ```
 
 ---
 
-## 🧠 Model Description
+## How to Run
 
-### Agents
-- Each agent represents an individual with a binary opinion (0 or 1).
-
-### Network Topology
-- **Small-world network** generated using the Watts–Strogatz model to mimic real-world social networks.
-
-### Dynamics
-At each time step:
-1. A random agent observes a neighbor.
-2. The agent adopts the neighbor's opinion with probability `p`.
-3. At predefined intervals, an **external shock** flips the opinions of a subset of agents.
-
-### Observables
-- **Consensus Time** – number of steps until all agents share the same opinion.
-- **Polarization** – fraction of agents holding each opinion over time.
-- **Stability** – effect of repeated shocks on long-term opinion distribution.
-
----
-
-## 📊 Key Results
-
-| Scenario             | Finding |
-|--------------------|--------|
-| No External Shock  | Consensus is typically reached quickly (few thousand steps). |
-| Small Shocks       | Delay consensus and keep diversity longer. |
-| Large/Frequent Shocks | Can prevent consensus entirely, leading to oscillating majority opinion. |
-
-
-
----
-
-## 🛠 How to Run Locally
-
-### 1. Clone this repository
 ```bash
-git clone https://github.com/Mahmudul-Hasan-24/Foundation-of-Computational-Social-System.git
-cd Foundation-of-Computational-Social-System
-```
+# Clone the repository
+git clone https://github.com/Mahmudul-Hasan-24/Kindle-Book-Success-Analysis-Python.git
 
-### 2. Create and activate a virtual environment
-```bash
-python -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
-```
+# Install required packages
+pip install pandas numpy matplotlib seaborn scikit-learn jupyter
 
-### 3. Install dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Run the notebook
-```bash
-jupyter notebook notebooks/opinion_dynamics.ipynb
+# Launch the notebook
+jupyter notebook Code.ipynb
 ```
 
 ---
 
-## 📦 Dependencies
-- networkx – network generation
-- numpy – numerical computations
-- matplotlib – plotting
-- jupyter – notebook interface
+## Skills Demonstrated
+
+- Data cleaning and preprocessing (missing values, outlier removal, normalization)
+- Feature engineering with Scikit-learn (MinMaxScaler)
+- Exploratory data analysis (EDA) and statistical modeling
+- Multi-variable correlation analysis
+- Data visualization with Matplotlib and Seaborn
+- Translating analytical findings into business recommendations
 
 ---
 
-## 🚀 Future Extensions
-- Implement **multi-opinion models** (more than two states).
-- Test effect of **network topology variations** (scale-free, random).
-- Add **adaptive networks** where connections change over time.
+## Author
 
----
-
-## 📜 License
-This project is licensed under the MIT License – see [LICENSE](LICENSE) for details.
-
----
-
-## 👤 Author
-**Mahmudul Hasan**  
-Master’s Computational Social System (Business Analytics) at Technical University and University of Graz 
+**Mahmudul Hasan**
+M.Sc. Computational Social Systems (Business Analytics)
+Technical University of Graz & University of Graz
+[LinkedIn](https://www.linkedin.com/in/mahmudul-hasan-764307249/) · [GitHub](https://github.com/Mahmudul-Hasan-24)
